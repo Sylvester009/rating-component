@@ -160,6 +160,14 @@ body {
   margin-top: 30px;
 }
 
+.hidden {
+    display: none;
+}
+.selected {
+    background: var(--LightGrey);
+    color: var(--White);
+}
+
 @media screen and (min-width: 800px) {
   .main {
     margin: 10% auto;
