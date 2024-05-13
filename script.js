@@ -1,50 +1,46 @@
 const main = document.getElementById("main");
-
-const one = document.getElementById("one");
-const two = document.getElementById("two");
-const three = document.getElementById("three");
-const four = document.getElementById("four");
-const five = document.getElementById("five");
-
 const selected = document.getElementById("selected");
-
 const button = document.getElementById("button");
 
-const numberArray = [one, two, three, four, five];
+const values = document.querySelectorAll('[data-val]')
 
-let activeElement = null;
+const close = document.getElementById("close");
 
-for (let i = 0; i < numberArray.length; i++) {
-  numberArray[i].addEventListener("click", () => {
-    if (activeElement) {
-      activeElement.classList.remove("number-active");
-    }
-    numberArray[i].classList.add("number-active");
-    activeElement = numberArray[i];
-  });
-}
+let rate = 0
+
+// ForEach is an Array method, you can use this to iterate thought you Array.
+values.forEach((btn, idx)=>{
+    btn.addEventListener('click', ()=>{
+        selectBtn(btn)
+        let btnValue = idx + 1
+        rate = btnValue
+    })
+})
+
 
 button.addEventListener("click", () => {
-  if (activeElement.classList.contains("number-active")) {
-    main.innerHTML = `
-    <section class="thank-state" id="thank-state">
-        <img
-          src="images/illustration-thank-you.svg"
-          alt="illustration-thank-you"
-          class="illustration-thank-you"
-        />
-        <p class="select-text text">
-          You selected <span class="selected" id="selected">${
-            activeElement ? activeElement.textContent : "#"
-          }</span> out of 5
-        </p>
-        <h2 class="title">Thank you!</h2>
-        <p class="text">
-          We appreciate you taking the time to give a rating. If you ever need
-          more support, don’t hesitate to get in touch!
-        </p>
-      </section>
-
-    `;
-  }
+    selected.innerText = rate
+    toggleCards()
 });
+
+close.addEventListener("click", () => {
+  //After 5 seconds, it will show the card again.
+    setTimeout(()=>{
+        toggleCards()
+    }, 5000)
+});
+
+function toggleCards(){
+    const rateCard = document.querySelector('#rating-state')
+    const thankCard = document.querySelector('#thank-state')
+    rateCard.classList.toggle('hidden') //Toggle the hidden class, so, if it will add/remove the class.
+    thankCard.classList.toggle('hidden') //Toggle the hidden class, so, if it will add/remove the class.
+}
+
+function selectBtn(btn){
+    values.forEach((btn)=>{
+        btn.classList.remove('selected')
+    })
+
+    btn.classList.add('selected')
+}
