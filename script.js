@@ -24,10 +24,10 @@ button.addEventListener("click", () => {
 });
 
 close.addEventListener("click", () => {
-  //After 5 seconds, it will show the card again.
+  //After 2 seconds, it will show the card again.
     setTimeout(()=>{
         toggleCards()
-    }, 5000)
+    }, 2000)
 });
 
 function toggleCards(){
